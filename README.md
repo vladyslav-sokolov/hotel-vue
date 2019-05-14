@@ -14,7 +14,7 @@ npm run serve
 ```
 npm run build
 
-### Firesabe hosting
+Firesabe hosting
 firebase deploy --only hosting
 ```
 
