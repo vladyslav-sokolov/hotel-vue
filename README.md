@@ -13,9 +13,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-
-Firesabe hosting
-firebase deploy --only hosting
 ```
 
 ### Run your tests
