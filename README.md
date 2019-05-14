@@ -1,4 +1,4 @@
-# sweewo-web
+# hotel-vue
 
 ## Project setup
 ```
@@ -16,7 +16,6 @@ npm run build
 
 ### Firesabe hosting
 firebase deploy --only hosting
-firebase hosting:disable
 ```
 
 ### Run your tests
@@ -28,6 +27,3 @@ npm run test
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
