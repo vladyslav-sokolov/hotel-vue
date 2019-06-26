@@ -37,7 +37,7 @@ const UserService = {
 
             return response.data.access_token
         } catch (error) {
-            throw new AuthenticationError(error.response.status, error.response.data.detail)
+            throw new AuthenticationError(error.response.status, error.response.data)
         }
     },
 
@@ -67,7 +67,7 @@ const UserService = {
 
             return response.data.access_token
         } catch (error) {
-            throw new AuthenticationError(error.response.status, error.response.data.detail)
+            throw new AuthenticationError(error.response.status, error.response.data)
         }
 
     },
@@ -82,19 +82,19 @@ const UserService = {
     },
 
     fetchUserDetails: async function () {
-        const response = await ApiService.get(hotelApiUrl + '/me')
+        const response = await ApiService.get(hotelApiUrl + '/user/me')
         return response.data
     },
 
-    updateUserImage: async function (image, id) {
-        let url = hotelApiUrl + '/user/' + id + '/image'
+    updateUserImage: async function (image) {
+        let url = hotelApiUrl + '/user/image'
         let formData = new FormData()
         formData.append("file", image)
         try {
             const response = await ApiService.post(url, formData)
             return response.data;
         } catch (error) {
-            throw new AuthenticationError(error.response.status, error.response.data.detail)
+            throw new AuthenticationError(error.response.status, error.response.data)
         }
     },
 
@@ -104,7 +104,7 @@ const UserService = {
             const response = await ApiService.put(url, user)
             return response.data;
         } catch (error) {
-            throw new AuthenticationError(error.response.status, error.response.data.detail)
+            throw new AuthenticationError(error.response.status, error.response.data)
         }
     },
 }

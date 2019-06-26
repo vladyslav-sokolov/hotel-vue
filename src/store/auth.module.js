@@ -26,7 +26,7 @@ const getters = {
         return !state.loginning && state.accessToken && state.errorCode === 0
     },
     isAdmin: (state) => {
-        return state.user.userType === 0
+        return state.user.userType === 'Manager'
     },
     loginning: (state) => {
         return state.loginning
@@ -96,10 +96,10 @@ const actions = {
         }
     },
 
-    async updateUserImage({ commit, getters }, image) {
+    async updateUserImage({ commit }, image) {
         commit('userImageUpdate')
         try {
-            var url = await UserService.updateUserImage(image, getters.user.id)
+            var url = await UserService.updateUserImage(image)
             commit('userImageUpdated', url)
         } catch (e) {
             if (e instanceof AuthenticationError) {

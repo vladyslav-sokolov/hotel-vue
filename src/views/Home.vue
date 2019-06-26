@@ -122,10 +122,10 @@
               <div class="headline">Hotel info</div>
             </v-card-title>
             <v-card-text>
-              <p>SweefLand Hotel was built in 1974, and since then, it has been offering the best in order to obtain the maximum level of customer satisfaction, which is the company’s pillar.</p>
+              <p>SweetLand Hotel was built in 1974, and since then, it has been offering the best in order to obtain the maximum level of customer satisfaction, which is the company’s pillar.</p>
               <p>To achieve this, we have an excellent team of professionals who are qualified and committed to ensuring that customers have a great experience during their stay, whether for business or while on vacation. On top of that, we also have a strategic location that is very well connected with the entire city.</p>
-              <p>Following four decades of experience in the sector, the SweefLand Hotel makes a continuous effort to improve the quality of its products and services every day.</p>
-              <p>SweefLand Hotel – we take care of the details!</p>
+              <p>Following four decades of experience in the sector, the SweetLand Hotel makes a continuous effort to improve the quality of its products and services every day.</p>
+              <p>SweetLand Hotel – we take care of the details!</p>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -157,7 +157,7 @@
                   <v-icon class="black--text text--lighten-2">email</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content>
-                  <v-list-tile-title>sweefland_hotel@gmail.com</v-list-tile-title>
+                  <v-list-tile-title>sweetland_hotel@gmail.com</v-list-tile-title>
                 </v-list-tile-content>
               </v-list-tile>
             </v-list>
@@ -195,14 +195,8 @@ export default {
     ],
     promos: [
       {
-        start_date: "May 10, 2019",
-        end_date: "May 25, 2019",
-        title: "Summer promo 20% off",
-        image: require("../assets/images/promo_1.jpg")
-      },
-      {
         start_date: "Jun 10, 2019",
-        end_date: "Nov 5, 2019",
+        end_date: "Sep 5, 2019",
         title: "June promo 10% off",
         image: require("../assets/images/promo_2.jpg")
       }

@@ -10,27 +10,27 @@ class BookingError extends Error {
     }
 }
 const BookingService = {
-    fetchAvailableRooms: async function (dateIn, dateOut, roomTypeCode) {
-        let url = hotelApiUrl + '/booking/rooms?dateIn=' + dateIn + '&dateOut=' + dateOut + '&roomTypeCode=' + roomTypeCode
+    fetchAvailableRooms: async function (query) {
+        let url = hotelApiUrl + '/room/available?in=' + query.in + '&out=' + query.out + '&code=' + query.code
         try {
             const response = await ApiService.get(url)
             return response.data;
         } catch (error) {
-            throw new BookingError(error.response.status, error.response.data.detail)
+            throw new BookingError(error.response.status, error.response.data)
         }
     },
-    fetchBookingsById: async function (id) {
+    fetchBookings: async function (isAdmin) {
         let url = '';
-        if (id < 0)
+        if (isAdmin)
             url = hotelApiUrl + '/booking';
         else
-            url = hotelApiUrl + '/booking/guest/' + id;
+            url = hotelApiUrl + '/booking/guest';
 
         try {
             const response = await ApiService.get(url)
             return response.data;
         } catch (error) {
-            throw new BookingError(error.response.status, error.response.data.detail)
+            throw new BookingError(error.response.status, error.response.data)
         }
     },
     createBooking: async function (booking) {
@@ -39,7 +39,7 @@ const BookingService = {
             const response = await ApiService.post(url, booking)
             return response.data;
         } catch (error) {
-            throw new BookingError(error.response.status, error.response.data.detail)
+            throw new BookingError(error.response.status, error.response.data)
         }
     },
 }

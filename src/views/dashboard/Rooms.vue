@@ -54,7 +54,7 @@
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" flat @click="editDialog = false">Cancel</v-btn>
-                    <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+                    <v-btn color="blue darken-1" flat :disabled="!selectedRoomType" @click="save">Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -78,8 +78,7 @@
             <template v-slot:items="props">
               <td>{{ props.item.number }}</td>
               <td class="text-xs-left">{{ props.item.floor }}</td>
-              <td class="text-xs-left">{{ props.item.roomType.code}}</td>
-              <td class="text-xs-left">{{ props.item.roomType.cost}}</td>
+              <td class="text-xs-left">{{ props.item.roomType}}</td>
               <td class="justify-center layout px-0">
                 <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
                 <v-icon small @click="deleteItem(props.item)">delete</v-icon>
@@ -109,8 +108,7 @@ export default {
     headers: [
       { text: "Room number", align: "left", value: "number" },
       { text: "Floor number", value: "floor" },
-      { text: "Room type(code)", value: "type-code" },
-      { text: "Room type(cost $)", value: "type-cost" },
+      { text: "Room type code", value: "type-code" },
       { text: "Actions", value: "actions", sortable: false, align: "center" }
     ],
     editedIndex: -1,
@@ -165,7 +163,7 @@ export default {
         } else {
           this.snackbar.color = "error";
           this.snackbar.text =
-            "Error creating new room [" + this.errorCode + "].";
+            "Error creating new room [" + this.errorCode + "]." + this.errorMessage;
         }
         this.snackbar.visible = false;
         setTimeout(() => {
@@ -180,7 +178,7 @@ export default {
           this.snackbar.text = "Room updated successfully.";
         } else {
           this.snackbar.color = "error";
-          this.snackbar.text = "Error updating room [" + this.errorCode + "].";
+          this.snackbar.text = "Error updating room [" + this.errorCode + "]." + this.errorMessage;
         }
         this.snackbar.visible = false;
         setTimeout(() => {
@@ -195,14 +193,14 @@ export default {
           this.snackbar.text = "Room deleted successfully.";
         } else {
           this.snackbar.color = "error";
-          this.snackbar.text = "Error deleting room [" + this.errorCode + "].";
+          this.snackbar.text = "Error deleting room [" + this.errorCode + "]." + this.errorMessage;
         }
         this.snackbar.visible = false;
         setTimeout(() => {
           this.snackbar.visible = true;
         }, 100);
       }
-    }
+    },
   },
 
   methods: {
@@ -236,14 +234,14 @@ export default {
     },
 
     save() {
-      this.editedItem.roomType = null;
-      if (this.selectedRoomType === null) return;
-      this.editedItem.roomTypeId = this.selectedRoomType.id;
+      this.editedItem.roomType = this.selectedRoomType;
       if (this.editedIndex > -1) {
         this.updateRoom(this.editedItem);
       } else {
+        this.editedItem.roomType = this.editedItem.roomType.code;
         this.createRoom(this.editedItem);
       }
+      this.selectedRoomType = null;
       this.editDialog = false;
     },
 

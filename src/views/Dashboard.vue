@@ -58,7 +58,7 @@
                       </v-dialog>
                     </v-avatar>
                     <v-card-text class="text-xs-center">
-                      <h4 class="body-2 font-weight-light my-2">@{{user.username}}</h4>
+                      <h4 class="body-2 font-weight-light my-2">{{user.userType}}@{{user.username}}</h4>
                       <h4
                         class="title font-weight-light my-1"
                       >{{user.firstName}}&nbsp;{{user.lastName}}</h4>
@@ -163,14 +163,20 @@ export default {
     ...mapGetters("error", ["networkError"])
   },
   mounted() {
-    this.userToUpdate = Object.assign({}, this.user);
+    this.userToUpdate.image = this.user.image;
     this.updateImageUrl();
+    this.userToUpdate = Object.assign({}, this.user);
   },
   watch: {
     updatingImage(val) {
-      if (val === false) {
+      if (!val) {
         this.userToUpdate.image = this.user.image;
         this.updateImageUrl();
+      }
+    },
+    updating(val) {
+      if (!val) {
+        this.userToUpdate = Object.assign({}, this.user);
       }
     }
   },

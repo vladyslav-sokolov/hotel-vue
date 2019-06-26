@@ -17,7 +17,7 @@ const RoomTypeService = {
             const response = await ApiService.get(url)
             return response.data;
         } catch (error) {
-            throw new RoomTypeError(error.response.status, error.response.data.detail)
+            throw new RoomTypeError(error.response.status, error.response.data)
         }
     },
     createRoomType: async function (roomType) {
@@ -26,7 +26,7 @@ const RoomTypeService = {
             const response = await ApiService.post(url, roomType)
             return response.data;
         } catch (error) {
-            throw new RoomTypeError(error.response.status, error.response.data.detail)
+            throw new RoomTypeError(error.response.status, error.response.data)
         }
     },
     updateRoomType: async function (roomType) {
@@ -35,7 +35,7 @@ const RoomTypeService = {
             const response = await ApiService.put(url, roomType)
             return response.data;
         } catch (error) {
-            throw new RoomTypeError(error.response.status, error.response.data.detail)
+            throw new RoomTypeError(error.response.status, error.response.data)
         }
     },
     deleteRoomType: async function (id) {
@@ -44,7 +44,7 @@ const RoomTypeService = {
             const response = await ApiService.delete(url)
             return response.status;
         } catch (error) {
-            throw new RoomTypeError(error.response.status, error.response.data.detail)
+            throw new RoomTypeError(error.response.status, error.response.data)
         }
     },
     updateRoomTypeImage: async function (image, id) {
@@ -55,7 +55,7 @@ const RoomTypeService = {
             const response = await ApiService.post(url, formData)
             return response.data;
         } catch (error) {
-            throw new RoomTypeError(error.response.status, error.response.data.detail)
+            throw new RoomTypeError(error.response.status, error.response.data)
         }
     }
 }

@@ -39,10 +39,10 @@ const getters = {
 }
 
 const actions = {
-    async fetchAvailableRooms({ commit }, params) {
+    async fetchAvailableRooms({ commit }, query) {
         commit('availableRoomsFetch')
         try {
-            const rooms = await BookingService.fetchAvailableRooms(params.inDate, params.outDate, params.roomTypeCode)
+            const rooms = await BookingService.fetchAvailableRooms(query)
             commit('availableRoomsFetched', rooms)
         } catch (e) {
             if (e instanceof BookingError) {
@@ -61,10 +61,10 @@ const actions = {
             }
         }
     },
-    async bookingsFetch({ commit }, id) {
+    async fetchBookings({ commit }, isAdmin) {
         commit("bookingsFetch")
         try {
-            let bookings = await BookingService.fetchBookingsById(id)
+            let bookings = await BookingService.fetchBookings(isAdmin)
             commit('bookingsFetched', bookings)
         } catch (e) {
             if (e instanceof BookingError) {

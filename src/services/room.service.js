@@ -17,7 +17,7 @@ const RoomService = {
             const response = await ApiService.get(url)
             return response.data;
         } catch (error) {
-            throw new RoomError(error.response.status, error.response.data.detail)
+            throw new RoomError(error.response.status, error.response.data)
         }
     },
     createRoom: async function (room) {
@@ -26,7 +26,7 @@ const RoomService = {
             const response = await ApiService.post(url, room)
             return response.data;
         } catch (error) {
-            throw new RoomError(error.response.status, error.response.data.detail)
+            throw new RoomError(error.response.status, error.response.data)
         }
     },
     updateRoom: async function (room) {
@@ -35,7 +35,7 @@ const RoomService = {
             const response = await ApiService.put(url, room)
             return response.data;
         } catch (error) {
-            throw new RoomError(error.response.status, error.response.data.detail)
+            throw new RoomError(error.response.status, error.response.data)
         }
     },
     deleteRoom: async function (id) {
@@ -44,7 +44,7 @@ const RoomService = {
             const response = await ApiService.delete(url)
             return response.status;
         } catch (error) {
-            throw new RoomError(error.response.status, error.response.data.detail)
+            throw new RoomError(error.response.status, error.response.data)
         }
     },
 }

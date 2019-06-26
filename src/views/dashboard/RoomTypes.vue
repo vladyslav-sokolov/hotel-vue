@@ -212,7 +212,7 @@ export default {
         } else {
           this.snackbar.color = "error";
           this.snackbar.text =
-            "Error creating new room type [" + this.errorCode + "].";
+            "Error creating new room type [" + this.errorCode + "]." + this.errorMessage;
         }
         this.snackbar.visible = false;
         setTimeout(() => {
@@ -228,7 +228,7 @@ export default {
         } else {
           this.snackbar.color = "error";
           this.snackbar.text =
-            "Error updating room type [" + this.errorCode + "].";
+            "Error updating room type [" + this.errorCode + "]." + this.errorMessage;
         }
         this.snackbar.visible = false;
         setTimeout(() => {
@@ -244,7 +244,7 @@ export default {
         } else {
           this.snackbar.color = "error";
           this.snackbar.text =
-            "Error deleting room type [" + this.errorCode + "].";
+            "Error deleting room type [" + this.errorCode + "]." + this.errorMessage;
         }
         this.snackbar.visible = false;
         setTimeout(() => {
@@ -260,7 +260,7 @@ export default {
         } else {
           this.snackbar.color = "error";
           this.snackbar.text =
-            "Error updating room type image [" + this.errorCode + "].";
+            "Error updating room type image [" + this.errorCode + "]." + this.errorMessage;
         }
         this.snackbar.visible = false;
         setTimeout(() => {

@@ -21,10 +21,10 @@
                 <td>{{ props.item.id }}</td>
                 <td class="text-xs-left">{{ props.item.dateFrom.substr(0, 10) }}</td>
                 <td class="text-xs-left">{{ props.item.dateTo.substr(0, 10)}}</td>
-                <td class="text-xs-left">{{ props.item.room.number}}</td>
-                <td class="text-xs-left">{{ props.item.room.roomType.code}}</td>
-                <td class="text-xs-left">{{ props.item.manager? props.item.manager.username:null}}</td>
-                <td class="text-xs-left">{{ props.item.guest? props.item.guest.username:null}}</td>
+                <td class="text-xs-left">{{ props.item.room}}</td>
+                <td class="text-xs-left">{{ props.item.roomType}}</td>
+                <td class="text-xs-left">{{ props.item.manager}}</td>
+                <td class="text-xs-left">{{ props.item.guest}}</td>
               </template>
             </v-data-table>
           </div>
@@ -69,26 +69,26 @@
                     <v-layout align-start justify-space-around row fill-height wrap>
                       <v-flex xs12 sm4>
                         <v-img
-                          :src="b.room.roomType.image?(hotelApiImageUrl+b.room.roomType.image):require('../../assets/images/default.png')"
+                          :src="b.room.image?(hotelApiImageUrl+b.room.image):require('../../assets/images/default.png')"
                         ></v-img>
                       </v-flex>
                       <v-flex xs12 sm4>
                         <div class="headline">Room info</div>
                         <div class="my-2 subheading font-weight-light">
                           <span class="font-weight-regular">Type:&nbsp;</span>
-                          <span>{{ b.room.roomType.code }}</span>
+                          <span>{{ b.room.code }}</span>
                         </div>
                         <div class="my-2 subheading font-weight-light">
                           <span class="font-weight-regular">Categories:&nbsp;</span>
-                          <span>{{ b.room.roomType.categories }}</span>
+                          <span>{{ b.room.categories }}</span>
                         </div>
                         <div class="my-2 subheading font-weight-light">
                           <span class="font-weight-regular">Facilities:&nbsp;</span>
-                          <span>{{ b.room.roomType.facilities }}</span>
+                          <span>{{ b.room.facilities }}</span>
                         </div>
                         <div class="my-2 subheading font-weight-light">
                           <span class="font-weight-regular">Bed type:&nbsp;</span>
-                          <span>{{ b.room.roomType.bedType }}</span>
+                          <span>{{ b.room.bedType }}</span>
                         </div>
                       </v-flex>
                       <v-flex xs12 sm4>
@@ -101,7 +101,7 @@
                           <span class="font-weight-regular">Total price:&nbsp;</span>
                           <span
                             class="font-weight-light"
-                          >{{ b.room.roomType.cost * (new Date(b.dateTo) - new Date(b.dateFrom))/(1000 * 3600 * 24) }}&nbsp;$</span>
+                          >{{ b.room.cost * (new Date(b.dateTo) - new Date(b.dateFrom))/(1000 * 3600 * 24) }}&nbsp;$</span>
                         </div>
                       </v-flex>
                     </v-layout>
@@ -126,11 +126,10 @@ export default {
       { text: "Booking id", align: "left", value: "id" },
       { text: "In date", value: "dateFrom" },
       { text: "Out date", value: "dateTo" },
-      { text: "Room number", value: "room.number" },
-      { text: "Room t-code", value: "room.roomType.code" },
+      { text: "Room number", value: "room" },
+      { text: "Room type", value: "room.roomType" },
       { text: "Manager", value: "manager.username" },
       { text: "Guest", value: "guest.username" }
-      // { text: "Actions", value: "actions", sortable: false, align: "center" }
     ]
   }),
   components: {
@@ -138,8 +137,7 @@ export default {
   },
   created() {
     if (!this.fetchingUser) {
-      if (this.isAdmin) this.bookingsFetch(-1);
-      else this.bookingsFetch(this.user.id);
+      this.fetchBookings(this.isAdmin);
     }
   },
   computed: {
@@ -153,14 +151,13 @@ export default {
     ...mapGetters("error", ["networkError"])
   },
   methods: {
-    ...mapActions("booking", ["bookingsFetch"]),
+    ...mapActions("booking", ["fetchBookings"]),
     ...mapActions("auth", ["fetchUserDetails"])
   },
   watch: {
     fetchingUser(val) {
       if (!val) {
-        if (this.isAdmin) this.bookingsFetch(-1);
-        else this.bookingsFetch(this.user.id);
+        this.fetchBookings(this.isAdmin);
       }
     }
   }

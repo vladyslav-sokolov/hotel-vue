@@ -322,17 +322,17 @@
                           <div class="my-3 headline font-weight-light">Room information:</div>
                           <div class="my-2 subheading font-weight-light">
                             <span class="font-weight-regular">Room type:&nbsp;</span>
-                            <span class="font-weight-light">{{ this.selectedRoom.roomType.code }}</span>
+                            <span class="font-weight-light">{{ this.selectedRoomType.code }}</span>
                           </div>
                           <div class="my-2 subheading font-weight-light">
                             <span class="font-weight-regular">Bed type:&nbsp;</span>
-                            <span class="font-weight-light">{{ this.selectedRoom.roomType.bedType }}</span>
+                            <span class="font-weight-light">{{ this.selectedRoomType.bedType }}</span>
                           </div>
                           <div class="my-2 subheading font-weight-light">
                             <span class="font-weight-regular">Facilities:&nbsp;</span>
                             <span
                               class="font-weight-light"
-                            >{{ this.selectedRoom.roomType.facilities }}</span>
+                            >{{ this.selectedRoomType.facilities }}</span>
                           </div>
                           <div class="my-2 subheading font-weight-light">
                             <span class="font-weight-regular">
@@ -368,7 +368,7 @@
                             <span class="font-weight-regular">Total price:&nbsp;</span>
                             <span
                               class="font-weight-light"
-                            >{{ this.selectedRoom.roomType.cost * (new Date(this.outDate) - new Date(this.inDate))/(1000 * 3600 * 24) }}&nbsp;$</span>
+                            >{{ this.selectedRoomType.cost * (new Date(this.outDate) - new Date(this.inDate))/(1000 * 3600 * 24) }}&nbsp;$</span>
                           </div>
                         </v-layout>
                       </v-container>
@@ -408,7 +408,7 @@
                   <div v-else>
                     <v-container>
                       <v-layout container column class="headline font-weight-light">
-                        <p>Booking with id "{{this.booking.id}}" has been created successfully!</p>
+                        <p>Booking with id "{{this.booking}}" has been created successfully!</p>
                         <p>
                           You can check all yours bookings in your
                           <router-link to="/dashboard/bookings">dashboard</router-link>.
@@ -518,9 +518,9 @@ export default {
         return;
       }
       let params = {
-        inDate: this.inDate,
-        outDate: this.outDate,
-        roomTypeCode: this.selectedRoomType.code
+        in: this.inDate,
+        out: this.outDate,
+        code: this.selectedRoomType.code
       };
       this.fetchAvailableRooms(params);
       this.bookingStepper = 1;

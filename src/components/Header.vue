@@ -27,7 +27,7 @@
     <v-toolbar app fixed clipped-left height="50">
       <v-toolbar-side-icon @click.stop="drawer = !drawer" v-if="loggedIn || $vuetify.breakpoint.smAndDown"></v-toolbar-side-icon>
       <v-toolbar-title>
-        <v-list-tile active-class to="/">SweefLand</v-list-tile>
+        <v-list-tile active-class to="/">SweetLand</v-list-tile>
       </v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn v-for="item in menu" :key="item.title" :to="item.to" flat>{{ item.title }}</v-btn>
